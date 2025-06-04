@@ -323,9 +323,9 @@ ITLC consists of several core components that work together to achieve language 
 
 - [**Latent Extraction**](./itlc/extract_embedding.py#L60): Isolates language-specific information from the model's representations by extracting hidden states at the middle layer.
 - [**Linear Discriminant Analysis (LDA)**](./itlc/get_language_vector.py#L11): Disentangles language-specific information by maximizing class separability and reducing dimensionality.
-- [**Language Vector Construction**](./itlc/itlc.py#L241): Constructs language vectors by leveraging the neural network's weights to identify active dimensions for each language.
-- [**Vector Injection**](./itlc/get_language_vector.py#L77): Projects the language vector back to the original embedding space and injects it into the hidden states during inference.
-- [**Language Shift Strategy**](./itlc/itlc.py#L175-L181): Divides the language vector injection into three strategies based on the temporal scope of application: prompt only, generated tokens only, and both phases.
+- [**Language Vector Construction**](./itlc/itlc.py#L236): Constructs language vectors by leveraging the neural network's weights to identify active dimensions for each language.
+- [**Vector Injection**](./itlc/itlc.py#L84): Projects the language vector back to the original embedding space and injects it into the hidden states during inference.
+- [**Language Shift Strategy**](./itlc/itlc.py#L170-L176): Divides the language vector injection into three strategies based on the temporal scope of application: prompt only, generated tokens only, and both phases.
 
 ### Application
 
