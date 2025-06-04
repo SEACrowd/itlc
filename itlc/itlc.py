@@ -25,9 +25,6 @@ class ITLC:
         tokenizer,
         device: torch.device = None,
         injection_layer_idx: int = None,
-        scale: float = 0.6,
-        shift_strategy: str = "prompt_and_gen",     # "prompt_only", "gen_only", "prompt_and_gen"
-        task: str = "crosslingual",       # "crosslingual" or "monolingual"
         lda_model_path: str = None,
         langvec_path: str = None,
         n_components:int = 100,
@@ -49,12 +46,7 @@ class ITLC:
         else:
             self.injection_layer_idx = injection_layer_idx
 
-        # 3. Store injection + scaling parameters
-        self.scale = scale
-        self.shift_strategy = shift_strategy
-        self.task = task
-
-        # 4. Initialize placeholders for LDA pseudoinverse and language-vectors
+        # 3. Initialize placeholders for LDA pseudoinverse and language-vectors
         self.lda_pinv = None
         self.language_vectors = None
         self.n_components = n_components
@@ -94,6 +86,9 @@ class ITLC:
         prompt: list,
         src_id: int,
         tgt_id: int,
+        scale: float = 0.5,
+        shift_strategy: str = "prompt_and_gen",     # "prompt_only", "gen_only", "prompt_and_gen"
+        task: str = "crosslingual",       # "crosslingual" or "monolingual"
         do_sample: bool =True,
         max_new_tokens: int = 256,
         temperature: float = 0.7,
@@ -136,18 +131,18 @@ class ITLC:
         src_vec_ori = src_vec @ self.lda_pinv
         tgt_vec_ori = tgt_vec @ self.lda_pinv
 
-        # C) Compute static vs. "embedding_means" scaling
+        # C) Static scaling
 
-        scale_sub = self.scale
-        scale_add = self.scale
+        scale_sub = scale
+        scale_add = scale
 
         # D) Build the shift vector in 896 dims
-        if self.task == "crosslingual":
+        if task == "crosslingual":
             shift_vec = -src_vec_ori * scale_sub + tgt_vec_ori * scale_add  # (896,)
-        elif self.task == "monolingual":
+        elif task == "monolingual":
             shift_vec = tgt_vec_ori * scale_add
         else:
-            raise ValueError(f"Unknown task: {self.task!r}")
+            raise ValueError(f"Unknown task: {task!r}")
 
         # E) Tokenize the prompt (batch size = 1)
         batch = self.tokenizer(
@@ -172,12 +167,12 @@ class ITLC:
 
             dyn_shift = shift_vec.view(1, 1, hidden_dim).expand(B, seq_len_cur, hidden_dim).to(hidden_states.device)
             # If encoding prompt (seq_len_cur > 1), apply only where attn=1
-            if seq_len_cur > 1 and self.shift_strategy in ("prompt_only", "prompt_and_gen"):
+            if seq_len_cur > 1 and shift_strategy in ("prompt_only", "prompt_and_gen"):
                 attn = attention_mask.unsqueeze(-1).type_as(dyn_shift)  # (1, seq_len_cur, 1)
                 hidden_states = hidden_states + dyn_shift * attn
 
             # If generating new token (seq_len_cur == 1), apply to whole vector
-            if seq_len_cur == 1 and self.shift_strategy in ("gen_only", "prompt_and_gen"):
+            if seq_len_cur == 1 and shift_strategy in ("gen_only", "prompt_and_gen"):
                 hidden_states = hidden_states + dyn_shift
 
             return (hidden_states, *outputs[1:])
