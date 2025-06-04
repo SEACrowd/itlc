@@ -91,7 +91,7 @@ def use_lda_to_get_language_vector(X_train, X_test, y_train, y_test, threshold=0
         language_vectors: The extracted language vectors.
     """   
     # Extract the pruned weights from the model
-    model, _, X_train_lda, _, y_train, _ = pruning_w_lda(X_train, X_test, y_train, y_test, 
+    model, lda, X_train_lda, _, y_train, _ = pruning_w_lda(X_train, X_test, y_train, y_test, 
                                                          n_components=100, n_languages=204, n_epochs=10)
 
     pruned_weights = model.dense.weight.data.cpu().numpy()  # [n_languages, n_components]
@@ -116,4 +116,4 @@ def use_lda_to_get_language_vector(X_train, X_test, y_train, y_test, threshold=0
             active_means = np.mean(lang_embeds_active, axis=0)  # [n_active]
             language_vectors[lang_idx][active_indices] = active_means
     
-    return language_vectors
+    return lda, language_vectors
