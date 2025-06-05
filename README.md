@@ -373,7 +373,7 @@ If you are using or develop method inspired by ITLC, please cite the following p
 ```
 @article{lopo2025itlc,
       title={Language Surgery in Multilingual Large Language Models}, 
-      author={Joanito Agili Lopo and Muhammad Ravi Shulthan Habibi and Tack Hwa Wong and Ghozali and Fajri Koto and Genta Indra Winata and Peerat Limkonchotiwat and Alham Fikri Aji and Samuel Cahyawijaya},
+      author={Joanito Agili Lopo and Muhammad Ravi Shulthan Habibi and Tack Hwa Wong and Muhammad Ilham Ghozali and Fajri Koto and Genta Indra Winata and Peerat Limkonchotiwat and Alham Fikri Aji and Samuel Cahyawijaya},
       year={2025},
       eprint={TODO},
       journal={TODO}
