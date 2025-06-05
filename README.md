@@ -342,17 +342,17 @@ ITLC has several applications in natural language processing:
 ITLC demonstrates strong cross-lingual control capabilities, as shown in the following table. Compared to baseline monolingual prompting, ITLC achieves similar to slightly higher generation performance across various target languages, as measured by BLEU and BERTScore metrics. This indicate that latent intervention in ITLC maintain semantic language-agnostic information.
 
 | Target Language | Baseline BLEU | ITLC BLEU | Baseline BERTScore | ITLC BERTScore |
-| --- | --- | --- | --- | --- |
-| ID | 19.29 | 14.3 | 62.9 | 63.6 |
-| TH | 0.0 | 15.97 | 62.8 | 64.1 |
-| TR | 6.05 | 15.97 | 60.7 | 60.2 |
-| JA | 0.0 | 15.97 | 62.0 | 60.2 |
-| FR | 7.78 | 10.97 | 63.3 | 63.2 |
-| ES | 10.88 | 7.17 | 64.0 | 64.4 |
-| AR | 7.13 | 11.88 | 63.8 | 65.5 |
-| ZH | 0.0 | 0.0 | 63.6 | 62.0 |
-| KO | 7.54 | 4.11 | 63.1 | 63.8 |
-| AVG | 6.52 | 10.70 | 62.91 | 63.00 |
+|------------------|----------------|------------|----------------------|------------------|
+| Indonesia        | 19.29          | 14.3       | 62.9                 | 63.6             |
+| Thai             | 0.0            | 15.97      | 62.8                 | 64.1             |
+| Turkish          | 6.05           | 15.97      | 60.7                 | 60.2             |
+| Japanese         | 0.0            | 15.97      | 62.0                 | 60.2             |
+| French           | 7.78           | 10.97      | 63.3                 | 63.2             |
+| Spanish          | 10.88          | 7.17       | 64.0                 | 64.4             |
+| Arabic           | 7.13           | 11.88      | 63.8                 | 65.5             |
+| Chinese          | 0.0            | 0.0        | 63.6                 | 62.0             |
+| Korean           | 7.54           | 4.11       | 63.1                 | 63.8             |
+| Average          | 6.52           | 10.70      | 62.91                | 63.00            |
 
 #### Mitigating Language Confusion
 
