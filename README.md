@@ -8,7 +8,7 @@ Inference-Time Language Control (ITLC) is a novel method designed to enhance cro
 
 ITLC addresses the challenge of language confusion in LLMs, which can lead to inconsistent language generation. By exploiting naturally emerging representation alignment in the middle layers of LLMs, ITLC disentangles language-specific and language-agnostic information. This allows for effective control over the generated language without compromising semantic meaning.
 
-The key contributions of ITLC and the corresponding ["Language Surgery in Multilingual Large Language Models"]() paper include:
+The key contributions of ITLC and the corresponding ["Language Surgery in Multilingual Large Language Models"](https://arxiv.org/abs/2506.12450) paper include:
 - Confirming the presence of representation alignment in LLMs and analyzing its behavior:
   ![Cosine Similarity Analysis](./images/cosine_similarity.png)
 - Demonstrating a method to extract and manipulate language-specific information.
@@ -375,7 +375,7 @@ If you are using or develop method inspired by ITLC, please cite the following p
       title={Language Surgery in Multilingual Large Language Models}, 
       author={Joanito Agili Lopo and Muhammad Ravi Shulthan Habibi and Tack Hwa Wong and Muhammad Ilham Ghozali and Fajri Koto and Genta Indra Winata and Peerat Limkonchotiwat and Alham Fikri Aji and Samuel Cahyawijaya},
       year={2025},
-      eprint={TODO},
-      journal={TODO}
+      eprint={2506.12450},
+      journal={arXiv preprint arXiv: 2506.12450}
 }
 ```
