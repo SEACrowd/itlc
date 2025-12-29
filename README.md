@@ -1,6 +1,6 @@
 # Inference-Time Language Control (ITLC)
 
-Inference-Time Language Control (ITLC) is a novel method designed to enhance cross-lingual language control and mitigate language confusion in Large Language Models (LLMs) that is introduced in ["Language Surgery in Multilingual Large Language Models"](). ITLC leverages latent injection to enable precise manipulation of language-specific information during inference, while preserving semantic integrity.
+Inference-Time Language Control (ITLC) is a novel method designed to enhance cross-lingual language control and mitigate language confusion in Large Language Models (LLMs) that is introduced in ["Language Surgery in Multilingual Large Language Models"](https://aclanthology.org/2025.mrl-main.30/). ITLC leverages latent injection to enable precise manipulation of language-specific information during inference, while preserving semantic integrity.
 
 <p align="center">
   <img src="./images/itlc_method.jpg" alt="ITLC Method Overview" width="400"/>
@@ -8,7 +8,7 @@ Inference-Time Language Control (ITLC) is a novel method designed to enhance cro
 
 ITLC addresses the challenge of language confusion in LLMs, which can lead to inconsistent language generation. By exploiting naturally emerging representation alignment in the middle layers of LLMs, ITLC disentangles language-specific and language-agnostic information. This allows for effective control over the generated language without compromising semantic meaning.
 
-The key contributions of ITLC and the corresponding ["Language Surgery in Multilingual Large Language Models"](https://arxiv.org/abs/2506.12450) paper include:
+The key contributions of ITLC and the corresponding ["Language Surgery in Multilingual Large Language Models"](https://aclanthology.org/2025.mrl-main.30/) paper include:
 - Confirming the presence of representation alignment in LLMs and analyzing its behavior:
   ![Cosine Similarity Analysis](./images/cosine_similarity.png)
 - Demonstrating a method to extract and manipulate language-specific information.
@@ -32,6 +32,9 @@ To install ITLC, follow these steps:
 1. Clone the repository: `git clone https://github.com/SEACrowd/itlc.git`
 2. move to itlc directory: `cd itlc`
 3. Install the required dependencies: `pip install -v -e .`
+   
+> [!IMPORTANT]
+> This repository is built on `transformers==4.43.0`. Using newer versions of the transformers library may cause compatibility issues or break the code.
 
 ### Usage
 
@@ -337,38 +340,21 @@ ITLC has several applications in natural language processing:
 
 ### Results
 
-#### Cross-Lingual Language Control
-
-ITLC demonstrates strong cross-lingual control capabilities, as shown in the following table. Compared to baseline monolingual prompting, ITLC achieves similar to slightly higher generation performance across various target languages, as measured by BLEU and BERTScore metrics. This indicate that latent intervention in ITLC maintain semantic language-agnostic information.
-
-| Target Language | Baseline BLEU | ITLC BLEU | Baseline BERTScore | ITLC BERTScore |
-|------------------|----------------|------------|----------------------|------------------|
-| Indonesia        | 19.29          | 14.3       | 62.9                 | 63.6             |
-| Thai             | 0.0            | 15.97      | 62.8                 | 64.1             |
-| Turkish          | 6.05           | 15.97      | 60.7                 | 60.2             |
-| Japanese         | 0.0            | 15.97      | 62.0                 | 60.2             |
-| French           | 7.78           | 10.97      | 63.3                 | 63.2             |
-| Spanish          | 10.88          | 7.17       | 64.0                 | 64.4             |
-| Arabic           | 7.13           | 11.88      | 63.8                 | 65.5             |
-| Chinese          | 0.0            | 0.0        | 63.6                 | 62.0             |
-| Korean           | 7.54           | 4.11       | 63.1                 | 63.8             |
-| Average          | 6.52           | 10.70      | 62.91                | 63.00            |
-
 #### Mitigating Language Confusion
 
-ITLC effectively mitigates language confusion in LLMs, as demonstrated in Table 2. The method significantly improves Language Confusion Precision Rate (LCPR), Language Precision Rate (LPR), and Word Precision Rate (WPR) compared to baseline zeros-shot and 5-shot ICL.
-
-| Method | LCPR | LPR | WPR |
-| --- | --- | --- | --- |
-| Baseline | 29.41 | 19.75 | 73.45 |
-| \+ Q/A template (0-shot) | 44.68 | 35.36 | 75.94 |
-| \+ 5-shot | 56.78 | 50.63 | 76.16 |
-| \+ ITLC (prompt-only, α=0.8) | 65.71 | 66.41 | 74.24 |
-| \+ ITLC (gen-only, α=0.6) | 71.35 | 80.46 | 67.67 |
-| \+ ITLC (prompt-and-gen, α=0.5) | 78.93 | 85.08 | 77.15 |
+ITLC effectively mitigates language confusion in LLMs, as demonstrated in Table 2. The method significantly improves Language Precision Rate (LPR) compared to baseline zeros-shot, 5-shot ICL and fine-tuning method.
+<img width="1182" height="454" alt="image" src="https://github.com/user-attachments/assets/c17439aa-a9d5-4f43-960f-5a0521b29676" />
 
 > [!NOTE]
-> The script used to evaluate the language confusion metrics, along with the corresponding output CSV files generated from the LLMs, can be found at [this link](https://drive.google.com/file/d/1mbRbCYLPSxRTuOjzsWnW5nbwVejVNzNy/view?usp=sharing)
+> The script used to evaluate the language confusion metrics, along with the corresponding output CSV files generated from the LLMs can be found at [this link](https://drive.google.com/file/d/1mbRbCYLPSxRTuOjzsWnW5nbwVejVNzNy/view?usp=sharing)
+
+#### Cross-Lingual Language Control
+
+ITLC demonstrates strong cross-lingual control capabilities, as shown in the following table. Compared to baseline monolingual prompting, ITLC achieves similar to slightly higher generation performance across various target languages, as measured by chrF++ (Left) and BERT F1 (Right) metrics. This indicate that latent intervention in ITLC maintain semantic language-agnostic information.
+<img width="585" height="323" alt="image" src="https://github.com/user-attachments/assets/a17c1b93-4787-4049-bc63-0fad15cc6e6c" />
+
+
+
 
 ## Citation
 If you are using or develop method inspired by ITLC, please cite the following publication:
@@ -382,3 +368,5 @@ If you are using or develop method inspired by ITLC, please cite the following p
       journal={arXiv preprint arXiv: 2506.12450}
 }
 ```
+
+
