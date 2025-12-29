@@ -365,7 +365,10 @@ ITLC effectively mitigates language confusion in LLMs, as demonstrated in Table 
 | \+ 5-shot | 56.78 | 50.63 | 76.16 |
 | \+ ITLC (prompt-only, α=0.8) | 65.71 | 66.41 | 74.24 |
 | \+ ITLC (gen-only, α=0.6) | 71.35 | 80.46 | 67.67 |
-| \+ ITLC (prompt-and-gen, α=0.5) | 78.93 | 85.08 | 77.15 |  
+| \+ ITLC (prompt-and-gen, α=0.5) | 78.93 | 85.08 | 77.15 |
+
+> [!NOTE]
+> The script used to evaluate the language confusion metrics, along with the corresponding output CSV files generated from the LLMs, can be found at [this link](https://drive.google.com/file/d/1mbRbCYLPSxRTuOjzsWnW5nbwVejVNzNy/view?usp=sharing)
 
 ## Citation
 If you are using or develop method inspired by ITLC, please cite the following publication:
